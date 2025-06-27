@@ -1,0 +1,135 @@
+html{
+    height: 100%;
+    margin: 0;
+}
+.login-body, .signup-body, .studentInquiry-body{
+    background-color: rgb(111, 77, 56);
+    display: grid;
+    place-items: center;
+    height: 90%;
+}
+.form-container{
+    justify-content: center;
+    background-color: rgb(213, 184, 147);
+    color: rgb(111, 77, 56);
+    padding: 40px 100px;
+    border-radius: 5px;
+}   
+.login-title, .signup-title, .studentInquiry-title{
+    text-align: center;
+    color: rgb(111, 77, 56);
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+.login-button, .signup-button, .studentInquiry-button, .ssrp-button{
+    background-color: rgb(111, 77, 56);
+    color: rgb(213, 184, 147);
+    border: none;
+    padding: 12px 60px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: opacity 0.15s, background-color 0.15s;
+}
+.login-button:hover, .signup-button:hover, .ssrp-button:hover{
+    background-color: rgb(91, 67, 51);
+}
+.login-button:active, .signup-button:active, .ssrp-button:active{
+    opacity: 0.5;
+}
+.studentInquiry-message{
+   background-color: White;
+}
+
+.studentInquiry-form-container{
+    justify-content: center;
+    background-color: rgb(213, 184, 147);
+    color: rgb(111, 77, 56);
+    padding: 30px 70px;
+    border-radius: 5px;
+}
+.button-container{
+    text-align: center;
+}
+header{
+    background-color: rgb(213, 184, 147);
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+}
+footer{
+    background-color: rgb(111, 77, 56);
+    padding: 80px;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.caretakerLanding-button{
+    background-color: rgb(111, 77, 56);
+    color: rgb(213, 184, 147);
+    border: none;
+    padding: 12px 60px;
+    margin-top: 20px;
+    margin-left: 10px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: opacity 0.15s, background-color 0.15s;
+}
+.caretakerLanding-body, .studentSearchResults-body{
+    margin: 0;
+    padding-bottom: 160px;
+}
+.clp-h2, .ssrp-h2{
+    text-align: center;
+    padding: 10px;
+}
+.topnav {
+    overflow: hidden;
+}
+.topnav a {
+    float: right;
+    color: rgb(91, 67, 51);
+    text-align: right;
+    padding: 18px 16px;
+    margin-right: 20px;
+    text-decoration: none;
+}
+.topnav a:hover {
+    background-color: rgb(91, 67, 51);
+    color: rgb(213, 184, 147);
+}
+.topnav a:active {
+    opacity: 0.5;
+}
+.topnav a.active {
+    background-color: rgb(91, 67, 51);
+    color: rgb(213, 184, 147);
+    float: left;
+}
+.column {
+    flex: 50%;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    width: 500px;
+    background-color: rgb(213, 184, 147);
+    padding: 10px;
+    border-radius: 5px;
+}
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+    display: flex;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+h3{
+    margin-left: 30px;
+}
