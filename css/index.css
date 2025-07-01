@@ -1,0 +1,40 @@
+:root{
+    --background1:#6f4d38;
+    --background2:#d5b893;
+    --linkhover:#c13584;
+    --buttoncolor:#ffffffa1;
+}
+
+body{
+    background-color: var(--background1);
+}
+
+.intowebsite{
+    display:flex;
+    flex-direction: column;/*Makes them appear as top to bottom not left to right*/
+    justify-content: center;/*Without the height, this won't work. 100vh means put it at the center cz the box is occupying 100% of the view height*/
+    align-items: center;
+    height:100vh;/*Eg 1vh means 1% of view height*/
+}
+
+.intowebsite a:hover{
+    color:var(--linkhover);
+    cursor: pointer;
+}
+
+.usertype a{
+    background-color: var(--background2);
+    padding:15px 70px;
+    margin:15px 0;
+    display:block;/*This is to make the vertical padding and margin work.*/
+    /*<a> is an inline element(occupies the space it's given, doesn't start on a new line. If you want to add height, width, vertical margin and padding, you have to make it a block element*/
+    text-align: center;
+}
+
+.login{
+    color:var(--background2);
+}
+
+.login a{
+    text-decoration: underline;
+}
