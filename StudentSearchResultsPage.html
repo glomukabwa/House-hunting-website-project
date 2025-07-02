@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Search Results Page</title>
+    <link rel="icon" type="icon" href="hhw-images\hhw-favicon.png">
     <link rel="stylesheet" href="stylesheet1.css">
-    <script src="script1.js"></script>
 </head>
 <body class="studentSearchResults-body">
 
     <header>
+        <div class="logo-link">
+            <a href="StudentSearchResultsPage.html" class="logo-link">
+                <img src="hhw-images/hhw-logo.png" alt="Logo" class="logo-img">
+        </div>
+
         <div class="topnav">
             <a href="StudentProfilePage.html">PROFILE</a>
             <a href="#news">News</a>
@@ -19,45 +24,113 @@
         </div>
     </header>
 
-    <h2 class="ssrp-h2">HOUSES THAT FIT SEARCH:</h2>
+    <main>
+        <h2 class="ssrp-h2">HOUSES THAT FIT SEARCH:</h2>
 
-    <div class="row">
-        <div class="column">
-            <h3>HOUSE ID:</h3>
-            <input type="submit" value="MAKE INQUIRY" class="ssrp-button">
+        <div class="row">
+            <div class="column">
+                <h3>HOUSE ID:</h3>
+
+                <div class="img-column">
+                    <img class="myImg" src="hhw-images\apt1.jpg">
+                    <img class="myImg" src="hhw-images\living-room1.jpg">
+                    <img class="myImg" src="hhw-images\kitchen1.jpg">
+                    <img class="myImg" src="hhw-images\bedroom1.jpg">
+                    <img class="myImg" src="hhw-images\bathroom-toilet1.jpg">
+                </div>
+
+                <div>
+                    <p>Title:</p>
+                    <p>Price:</p>
+                    <p>Location:</p>
+                    <p>Description:</p>
+                    <p>Caretaker Info:</p>
+                </div>
+
+                <input type="button" value="MAKE INQUIRY" onclick="window.location.href='StudentInquiry.html'" class="ssrp-button">
+            </div>
+
+            <div class="column">
+                <h3>HOUSE ID:</h3>
+
+                <div class="img-column">
+                    <img class="myImg" src="hhw-images\apt2.jpg">
+                    <img class="myImg" src="hhw-images\living-room2.jpg">
+                    <img class="myImg" src="hhw-images\kitchen2.jpg">
+                    <img class="myImg" src="hhw-images\bedroom2.jpg">
+                    <img class="myImg" src="hhw-images\bathroom-toilet2.jpg">
+                </div>
+
+                <div>
+                    <p>Title:</p>
+                    <p>Price:</p>
+                    <p>Location:</p>
+                    <p>Description:</p>
+                    <p>Caretaker Info:</p>
+                </div>
+
+                <input type="button" value="MAKE INQUIRY" onclick="window.location.href='StudentInquiry.html'" class="ssrp-button">
+            </div>
         </div>
 
-        <div class="column">
-            <h3>HOUSE ID:</h3>
-            <input type="submit" value="MAKE INQUIRY" class="ssrp-button">
-        </div>
-    </div>
+        <div class="row">
+            <div class="column">
+                <h3>HOUSE ID:</h3>
 
-    <div class="row">
-        <div class="column">
-            <h3>HOUSE ID:</h3>
-            <input type="submit" value="MAKE INQUIRY" class="ssrp-button">
-        </div>
+                <div class="img-column">
+                    <img class="myImg" src="hhw-images\apt3.jpg">
+                    <img class="myImg" src="hhw-images\living-room3.jpg">
+                    <img class="myImg" src="hhw-images\kitchen3.jpg">
+                    <img class="myImg" src="hhw-images\bedroom3.jpg">
+                    <img class="myImg" src="hhw-images\bathroom-toilet3.jpg">
+                </div>
 
-        <div class="column">
-            <h3>HOUSE ID:</h3>
-            <input type="submit" value="MAKE INQUIRY" class="ssrp-button">
-        </div>
-    </div>
+                <div>
+                    <p>Title:</p>
+                    <p>Price:</p>
+                    <p>Location:</p>
+                    <p>Description:</p>
+                    <p>Caretaker Info:</p>
+                </div>
 
-    <div class="row">
-        <div class="column">
-            <h3>HOUSE ID:</h3>
-            <input type="submit" value="MAKE INQUIRY" class="ssrp-button">
-        </div>
+                <input type="button" value="MAKE INQUIRY" onclick="window.location.href='StudentInquiry.html'" class="ssrp-button">
+            </div>
 
-        <div class="column">
-            <h3>HOUSE ID:</h3>
-            <input type="submit" value="MAKE INQUIRY" class="ssrp-button">
+            <div class="column">
+                <h3>HOUSE ID:</h3>
+
+                <div class="img-column">
+                    <img class="myImg" src="hhw-images\apt4.jpg">
+                    <img class="myImg" src="hhw-images\living-room4.jpg">
+                    <img class="myImg" src="hhw-images\kitchen4.jpg">
+                    <img class="myImg" src="hhw-images\bedroom4.jpg">
+                    <img class="myImg" src="hhw-images\bathroom-toilet4.jpg">
+                </div>
+
+                <div>
+                    <p>Title:</p>
+                    <p>Price:</p>
+                    <p>Location:</p>
+                    <p>Description:</p>
+                    <p>Caretaker Info:</p>
+                </div>
+
+                <input type="button" value="MAKE INQUIRY" onclick="window.location.href='StudentInquiry.html'" class="ssrp-button">
+            </div>
         </div>
-    </div>
+    </main>
 
     <footer></footer>
+
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div class="slide-number" id="slideNumber"></div> 
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
+    </div>
+
+    <script src="script1.js"></script>
 
 </body>
 </html>

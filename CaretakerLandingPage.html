@@ -1,29 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caretaker Landing Page</title>
-    <link rel="stylesheet" href="stylesheet1.css">
-    <script src="script1.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Caretaker Landing Page</title>
+  <link rel="icon" type="icon" href="hhw-images\hhw-favicon.png">
+  <link rel="stylesheet" href="stylesheet1.css" />
+  <script src="script1.js"></script>
 </head>
+
 <body class="caretakerLanding-body">
-    
-    <header>
-        <div class="topnav">
-            <a href="CaretakerProfilePage.html">PROFILE</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
-            <a class="active" href="CaretakerLandingPage.html">HOME</a>
-        </div>
-    </header>
 
-    <h2 class="clp-h2">INQUIRES:</h2>
+  <header>
+    <div class="logo-link">
+        <a href="StudentSearchResultsPage.html" class="logo-link">
+            <img src="hhw-images/hhw-logo.png" alt="Logo" class="logo-img">
+    </div>
 
-    <input type="submit" value="ADD HOUSE LISTING" class="caretakerLanding-button">
+    <div class="topnav">
+      <a href="CaretakerProfilePage.html">PROFILE</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+      <a href="#about">About</a>
+      <a class="active" href="CaretakerLandingPage.html">HOME</a>
+    </div>
+  </header>
 
-    <footer> </footer>
-    
+  <h2 class="clp-h2">INQUIRIES:</h2>
+
+  <?php require 'inquiryRetrival.php'; ?>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Inquiry ID</th>
+        <th>Student ID</th>
+        <th>House ID</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php while ($row = $result->fetch_assoc()): ?>
+        <tr>
+          <td><?= $row['inquiryId'] ?></td>
+          <td><?= $row['studentId'] ?></td>
+          <td><?= $row['houseId'] ?></td>
+          <td><?= $row['inquiryDate'] ?></td>
+          <td><?= $row['inquiryStatus'] ?></td>
+          <td>
+            <form method="GET" action="viewInquiry.php">
+              <input type="hidden" name="id" value="<?= $row['inquiryId'] ?>" />
+              <button class="view-btn">VIEW</button>
+            </form>
+          </td>
+        </tr>
+      <?php endwhile; ?>
+    </tbody>
+  </table>
+
+  <div class="add-house-btn-wrapper">
+    <form action="AddHouseForm.php" method="get">
+      <input type="submit" value="ADD HOUSE LISTING" class="caretakerLanding-button" />
+    </form>
+  </div>
+
+  <footer>
+    <div class="footer">
+      FOOTER
+    </div>
+  </footer>
+
 </body>
 </html>
