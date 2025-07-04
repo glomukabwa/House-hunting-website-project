@@ -6,7 +6,6 @@
     --fontcolor:white;
     font-size:62.5%;
 }
-
 body{
     background-color: var(--background1);
 }
@@ -15,12 +14,12 @@ body{
 .wrapper{
     display:flex;
     flex-direction: column;
-    min-height: 100vh; /* Makes sure wrapper is full height */
+    min-height: 100vh;/* Makes sure wrapper is full height */
 }
 
 /* Let main grow to fill space */
 main {
-  flex: 1;
+    flex: 1;
 }
 /*End of demo of how to make a footer stay at the bottom even if the content is little*/
 
@@ -35,7 +34,6 @@ a:hover, button:hover{
 input:focus{
     border: solid 2px var(--buttoncolor);
 }
-
 
 header{
     background-color: var(--background2);
@@ -75,39 +73,33 @@ main{
 
 .search input{
     background-color: var(--background2);
-    margin:0 5rem;
-    padding:1rem 1rem;
+    margin:0 1rem;
+    padding:1rem;
     border-radius:1rem;
     color:var(--background1);
 }
 
 .searchbutton{
     background-color: var(--buttoncolor);
-    padding: 1rem 5rem;
-    display:block;
-    margin: 0 auto;
+    padding: 1rem 2rem;
     color: var(--background1);
 }
 
 .available{
     margin-top:3rem;
 }
+
 .housepictures{
     margin: 2rem 0;
     display:flex;
+    flex-wrap: wrap;
+    gap: 2rem;
 }
 
 .housepictures a img{
-    padding: 0 4.5rem;
-    width:40rem;
-}
-
-.housepictures a img:nth-child(1){
-    padding-left: 0;
-}
-
-.housepictures a img:nth-child(4){
-    padding-right: 0;
+    width:20rem;
+    height:15rem;
+    object-fit: cover;
 }
 
 footer{
@@ -121,11 +113,10 @@ footer{
 footer div{
     width:50%;
 }
-
 .sitemap a{
     display: block;
 }
-
 .contacts{
     text-align: right;
 }
+
