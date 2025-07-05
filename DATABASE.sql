@@ -17,7 +17,7 @@ CREATE TABLE Caretaker (
     caretakerEmail VARCHAR(100) UNIQUE,
     caretakerPhoneNumber VARCHAR(20),
     caretakerPassword VARCHAR(255),
-    isVerified BOOLEAN DEFAULT FALSE,
+    isVerified BOOLEAN DEFAULT FALSE, /*I'm gonna use this instead of creating a whole other table for pending requests to avoid duplication and then I'm gonna use WHERE isVerified = FALSE in the admin page to get the pending requests*/
     verificationDate DATE
 );
 
@@ -71,3 +71,48 @@ CREATE TABLE Reviews (
     FOREIGN KEY (reviewedId) REFERENCES Caretaker(caretakerId)
         ON DELETE CASCADE
 );
+
+-- Table for Pending House Listings
+CREATE TABLE PendingHouse (
+    pendingHouseId INT PRIMARY KEY AUTO_INCREMENT,
+    houseTitle VARCHAR(100),
+    houseLocation VARCHAR(100),
+    housePrice FLOAT,
+    houseDescription TEXT,
+    imageUrl VARCHAR(255),
+    caretakerId INT,
+    submissionDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (caretakerId) REFERENCES Caretaker(caretakerId)
+        ON DELETE SET NULL
+);
+
+CREATE TABLE RejectedCaretaker (
+    rejectionId INT AUTO_INCREMENT PRIMARY KEY,
+    caretakerId INT,
+    caretakerName VARCHAR(100),
+    caretakerEmail VARCHAR(100),
+    caretakerPhoneNumber VARCHAR(15),
+    rejectionReason TEXT,
+    rejectionDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE RejectedHouse (
+    rejectionId INT AUTO_INCREMENT PRIMARY KEY,
+    pendingHouseId INT,
+    houseTitle VARCHAR(100),
+    houseLocation VARCHAR(100),
+    housePrice FLOAT,
+    houseDescription TEXT,
+    imageUrl VARCHAR(255),
+    caretakerId INT,
+    rejectionReason TEXT,
+    rejectionDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE HouseImages (
+    imageId INT AUTO_INCREMENT PRIMARY KEY,
+    houseId INT,
+    imageUrl VARCHAR(255),
+    FOREIGN KEY (houseId) REFERENCES PendingHouse(pendingHouseId) ON DELETE CASCADE
+);
+

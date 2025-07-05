@@ -29,6 +29,7 @@ $houses = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Landing Page</title>
+    <link rel="icon" type="icon" href="hhw-images\hhw-favicon.png">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/slanding.css">
 </head>
@@ -36,7 +37,7 @@ $houses = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     <div class="wrapper">
         <header>
         <div class="logo">
-            <p>LOGO</p>
+            <img src="hhw-images/hhw-logo.png" alt="Logo" class="logo-img">
         </div>
         <nav>
             <a href="#">HOME</a>
@@ -63,17 +64,30 @@ $houses = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
         
         <section class="housepictures">
         <?php
-        $sql = "SELECT * FROM House WHERE isApproved = 1 ORDER BY approvalDate DESC LIMIT 4";
+        $sql = "
+            SELECT h.houseId, h.houseTitle, hi.imageUrl
+            FROM House h
+            LEFT JOIN (
+                SELECT houseId, MIN(imageUrl) AS imageUrl
+                FROM HouseImages
+                GROUP BY houseId
+            ) hi ON h.houseId = hi.houseId
+            WHERE h.isApproved = 1
+            ORDER BY h.approvalDate DESC
+            LIMIT 4
+       ";
 
-        $result = $conn->query($sql);
+       $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-              echo '<a href="#"><img src="' . $row["image_url"] . '" alt="House"></a>';
-           }
+       if ($result && $result->num_rows > 0) {
+           while ($row = $result->fetch_assoc()) {
+                $image = $row['imageUrl'] ?? 'images/default-placeholder.png'; // We use ?? 'default-placeholder.png' to avoid errors if a house somehow has no images (it is an optional safe option)
+                echo '<a href="#"><img src="' . $image . '" alt="House"></a>';
+            }
         } else {
             echo "<p>No houses available.</p>";
         }
+
         ?>
         </section>
 

@@ -24,18 +24,19 @@
     
     <?php
         session_start();
+        include 'config.php'; 
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $servername = "localhost:3310";
-            $username = "root";
-            $password = ""; 
-            $database = "househuntingwebsitedb"; 
+            //$servername = "localhost:3301";
+            //$username = "root";
+            //$password = ""; 
+            //$database = "househuntingwebsitedb"; 
 
-            $conn = new mysqli($servername, $username, $password, $database);
+            //$conn = new mysqli($servername, $username, $password, $database);
             
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
+            //if ($conn->connect_error) {
+                //die("Connection failed: " . $conn->connect_error);
+            //}
 
             $email = trim($_POST['email']);
             $inputPassword = $_POST['password'];
@@ -47,7 +48,7 @@
             if ($row = $result->fetch_assoc()) {
                 if (password_verify($inputPassword, $row['caretakerPassword'])) {
                     $_SESSION['caretakerId'] = $row['caretakerId'];
-                    header("Location: CaretakerLandingPage.html");
+                    header("Location: CaretakerLandingPage.php");
                     exit();
                 }
             }
@@ -60,7 +61,7 @@
             if ($row = $result->fetch_assoc()) {
                 if (password_verify($inputPassword, $row['adminPassword'])) {
                     $_SESSION['adminId'] = $row['adminId'];
-                    header("Location: administratorPage.html");
+                    header("Location: admin.php");
                     exit();
                 }
             }
@@ -73,7 +74,7 @@
             if ($row = $result->fetch_assoc()) {
                 if (password_verify($inputPassword, $row['studentPassword'])) {
                     $_SESSION['studentId'] = $row['studentId'];
-                    header("Location: studentLandingPage.html");
+                    header("Location: StudentLandingPage.html");
                     exit();
                 }
             }

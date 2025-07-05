@@ -30,8 +30,9 @@
     </form>
 
     <?php
+    include 'config.php';
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $servername = "localhost:3310";
+            /*$servername = "localhost:3310";
             $username = "root";
             $password = ""; 
             $database = "househuntingwebsitedb";
@@ -40,7 +41,7 @@
 
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
-            }
+            }*/
 
             $name = trim($_POST['name']);
             $email = trim($_POST['email']);
@@ -63,9 +64,9 @@
 
             if ($stmt->execute()) {
                 if ($role === 'student') {
-                    header("Location: StudentLandingPage.html");
+                    header("Location: StudentLanding.php");
                 } elseif ($role === 'caretaker') {
-                    header("Location: CaretakerLandingPage.html");
+                    header("Location: CaretakerLandingPage.php");
                 } 
                 exit();
             } else {

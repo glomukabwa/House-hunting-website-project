@@ -47,6 +47,10 @@ header{
     width:33.33%;
 }
 
+.logo img{
+    height:7rem;
+}
+
 nav a{
     padding:1.5rem;
 }
