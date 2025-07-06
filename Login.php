@@ -17,71 +17,97 @@
             <input type="email" id="email" name="email" required><br><br>
         <label for="password">Enter Password:</label><br>
             <input type="password" id="password" name="password" required><br><br>
+        <label for="role">I am a/an:</label><br>
+            <input type="radio" name="role" value="student" required> Student<br>
+            <input type="radio" name="role" value="caretaker" required> Caretaker<br>
+            <input type="radio" name="role" value="admin" required> Admin<br><br>
         <div class="button-container">
             <input type="submit" value="ENTER" class="login-button">
         </div>
     </form>
     
     <?php
-        session_start();
-        include 'config.php'; 
+session_start();
 
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            //$servername = "localhost:3301";
-            //$username = "root";
-            //$password = ""; 
-            //$database = "househuntingwebsitedb"; 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $servername = "localhost:3310";
+    $username = "root";
+    $password = ""; 
+    $database = "househuntingwebsitedb"; 
 
-            //$conn = new mysqli($servername, $username, $password, $database);
-            
-            //if ($conn->connect_error) {
-                //die("Connection failed: " . $conn->connect_error);
-            //}
+    $conn = new mysqli($servername, $username, $password, $database);
 
-            $email = trim($_POST['email']);
-            $inputPassword = $_POST['password'];
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-            $stmt = $conn->prepare("SELECT * FROM caretaker WHERE caretakerEmail = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if ($row = $result->fetch_assoc()) {
-                if (password_verify($inputPassword, $row['caretakerPassword'])) {
-                    $_SESSION['caretakerId'] = $row['caretakerId'];
-                    header("Location: CaretakerLandingPage.php");
-                    exit();
-                }
+    $email = trim($_POST['email']);
+    $inputPassword = $_POST['password'];
+    $role = $_POST['role'];
+
+    // Check existence across all roles
+    $studentStmt = $conn->prepare("SELECT studentPassword, studentId, studentName FROM student WHERE studentEmail = ?");
+    $studentStmt->bind_param("s", $email);
+    $studentStmt->execute();
+    $studentResult = $studentStmt->get_result();
+    $student = $studentResult->fetch_assoc();
+    $studentStmt->close();
+
+    $caretakerStmt = $conn->prepare("SELECT caretakerPassword, caretakerId, caretakerName FROM caretaker WHERE caretakerEmail = ?");
+    $caretakerStmt->bind_param("s", $email);
+    $caretakerStmt->execute();
+    $caretakerResult = $caretakerStmt->get_result();
+    $caretaker = $caretakerResult->fetch_assoc();
+    $caretakerStmt->close();
+
+    $adminStmt = $conn->prepare("SELECT adminPassword, adminId, adminName FROM admin WHERE adminEmail = ?");
+    $adminStmt->bind_param("s", $email);
+    $adminStmt->execute();
+    $adminResult = $adminStmt->get_result();
+    $admin = $adminResult->fetch_assoc();
+    $adminStmt->close();
+
+    // Email doesn't exist at all
+    if (!$student && !$caretaker && !$admin) {
+        echo "<script>alert('Invalid email. Please sign up.'); window.history.back();</script>";
+    }
+    // Email exists, but in a different role
+    elseif (($role === 'student' && !$student) || ($role === 'caretaker' && !$caretaker) || ($role === 'admin' && !$admin)) {
+        echo "<script>alert('Please select the correct role.'); window.history.back();</script>";
+    }
+    else {
+        // Correct role → verify password
+
+        if ($role === 'student') {
+            if (password_verify($inputPassword, $student['studentPassword'])) {
+                $_SESSION['studentId'] = $student['studentId'];
+                echo "<script>alert('Welcome back " . addslashes($student['studentName']) . "'); window.location.href='slanding.html';</script>";
+                exit();
+            } else {
+                echo "<script>alert('Incorrect password!!!'); window.history.back();</script>";
             }
-            $stmt->close();
-
-            $stmt = $conn->prepare("SELECT * FROM admin WHERE adminEmail = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if ($row = $result->fetch_assoc()) {
-                if (password_verify($inputPassword, $row['adminPassword'])) {
-                    $_SESSION['adminId'] = $row['adminId'];
-                    header("Location: admin.php");
-                    exit();
-                }
+        } elseif ($role === 'caretaker') {
+            if (password_verify($inputPassword, $caretaker['caretakerPassword'])) {
+                $_SESSION['caretakerId'] = $caretaker['caretakerId'];
+                echo "<script>alert('Welcome back " . addslashes($caretaker['caretakerName']) . "'); window.location.href='CaretakerLandingPage.php';</script>";
+                exit();
+            } else {
+                echo "<script>alert('Incorrect password!!!'); window.history.back();</script>";
             }
-            $stmt->close();
-
-            $stmt = $conn->prepare("SELECT * FROM student WHERE studentEmail = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if ($row = $result->fetch_assoc()) {
-                if (password_verify($inputPassword, $row['studentPassword'])) {
-                    $_SESSION['studentId'] = $row['studentId'];
-                    header("Location: StudentLandingPage.html");
-                    exit();
-                }
+        } elseif ($role === 'admin') {
+            if ($inputPassword === $admin['adminPassword']) {
+                $_SESSION['adminId'] = $admin['adminId'];
+                echo "<script>alert('Welcome back " . addslashes($admin['adminName']) . "'); window.location.href='admin.html';</script>";
+                exit();
+            } else {
+               echo "<script>alert('Incorrect password!!!'); window.history.back();</script>";
             }
-            $stmt->close();
-            $conn->close();
-            echo "<p style='color:red; text-align:center;'>Invalid login. Please try again.</p>";
         }
-    ?>
+    }
+
+    $conn->close();
+}
+?>
+
 </body>
 </html>
