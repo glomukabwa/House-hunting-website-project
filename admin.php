@@ -39,7 +39,6 @@
         </tr>
 
     <?php
-    // Fetching unverified caretakers
     $caretakers = $conn->query("SELECT * FROM caretaker WHERE isVerified = FALSE");
 
     while ($row = $caretakers->fetch_assoc()) {
@@ -63,7 +62,6 @@
           </tr>";
     }
     ?>
-
      </table>
      <br><br><br><br><br>
 
@@ -92,16 +90,24 @@
                 <td>{$row['houseLocation']}</td>
                 <td>{$row['caretakerId']}</td>
                 <td>{$row['houseDescription']}</td>
+                <td>";
 
-                
-                <td>
-                <form method='GET' action='view_images.php'>
+        $imgStmt = $conn->prepare("SELECT imageUrl FROM PendingHouseImages WHERE houseId = ? LIMIT 1");
+        $imgStmt->bind_param("i", $row['pendingHouseId']);
+        $imgStmt->execute();
+        $imgResult = $imgStmt->get_result();
+        $img = $imgResult->fetch_assoc();
+        $imgStmt->close();
+
+        $imgUrl = $img ? $img['imageUrl'] : 'images/default-placeholder.png';
+        echo "<img src='{$imgUrl}' alt='Preview' style='width:100px; height:auto; border-radius:5px;'>
+            <form method='GET' action='view_images.php'>
                 <input type='hidden' name='houseId' value='{$row['pendingHouseId']}'>
-                <input class='viewimages' type='submit' value='View Images'>
-                </form>
-                </td>
+                <input class='viewimages' type='submit' value='View All'>
+            </form>
+            </td>";
 
-                <td>
+        echo "<td>
                     <form method='POST' action='approve.php' style='display:inline;'>
                         <input type='hidden' name='id' value='{$row['pendingHouseId']}'>
                         <input class='approve' type='submit' value='Approve'>
@@ -111,7 +117,6 @@
                         <input type='hidden' name='id' value='{$row['pendingHouseId']}'>
                         <input class='reject' type='submit' value='Reject'><br>
                         <input type='text' name='reason' placeholder='Reason for rejection' required>
-                        
                     </form>
                 </td>
               </tr>";
@@ -120,12 +125,9 @@
      </table>
 
      <div style="text-align: center; margin: 20px;">
-    <a href="RejectedHouses.php" class="button-link">View Rejected Houses</a> |
-    <a href="RejectedCaretakers.php" class="button-link">View Rejected Caretakers</a>
-    </div>
-
-
-
+        <a href="RejectedHouses.php" class="button-link">View Rejected Houses</a> |
+        <a href="RejectedCaretakers.php" class="button-link">View Rejected Caretakers</a>
+     </div>
      </main>
 
      <footer>
@@ -143,6 +145,5 @@
         </div>
      </footer>
     </div>
-    
 </body>
 </html>

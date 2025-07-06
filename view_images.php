@@ -4,30 +4,41 @@ include 'config.php';
 if (isset($_GET['houseId'])) {
     $houseId = intval($_GET['houseId']);
 
-    $stmt = $conn->prepare("SELECT imageUrl FROM HouseImages WHERE houseId = ?");
+    // First check in PendingHouseImages
+    $stmt = $conn->prepare("SELECT imageUrl FROM PendingHouseImages WHERE houseId = ?");
     $stmt->bind_param("i", $houseId);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    echo "<h2>Images for House ID: $houseId</h2>";
+    echo "<h2>Images for House ID: {$houseId}</h2>";
 
     if ($result->num_rows > 0) {
-        echo "<div style='display: flex; flex-wrap: wrap; gap: 20px;'>";
         while ($row = $result->fetch_assoc()) {
-            echo "<img src='{$row['imageUrl']}' width='300' style='border: 1px solid #ccc; padding: 10px;'>";
+            echo "<img src='{$row['imageUrl']}' alt='House Image' style='width:200px; margin:10px; border-radius:8px;'>";
         }
-        echo "</div>";
     } else {
-        echo "<p>No images found for this house.</p>";
+        // If not found in pending, check in approved
+        $stmt = $conn->prepare("SELECT imageUrl FROM HouseImages WHERE houseId = ?");
+        $stmt->bind_param("i", $houseId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<img src='{$row['imageUrl']}' alt='House Image' style='width:200px; margin:10px; border-radius:8px;'>";
+            }
+        } else {
+            echo "<p>No images found for this house.</p>";
+        }
     }
 
-    echo "<br><a href='admin.php'>Back to Admin Page</a>";
-
     $stmt->close();
+    $conn->close();
 } else {
-    echo "Invalid house ID.";
+    echo "<p>No house ID provided.</p>";
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

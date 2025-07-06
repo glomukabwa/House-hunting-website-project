@@ -113,8 +113,18 @@ CREATE TABLE HouseImages (
     imageId INT AUTO_INCREMENT PRIMARY KEY,
     houseId INT,
     imageUrl VARCHAR(255),
-    FOREIGN KEY (houseId) REFERENCES PendingHouse(pendingHouseId) ON DELETE CASCADE
+    FOREIGN KEY (houseId) REFERENCES House(houseId) ON DELETE CASCADE
 );
 
 --Adding field for inquiry response
 ALTER TABLE inquiry ADD inquiryResponse TEXT;
+
+CREATE TABLE PendingHouseImages (
+    imageId INT AUTO_INCREMENT PRIMARY KEY,
+    houseId INT NOT NULL,
+    imageUrl VARCHAR(255) NOT NULL,
+    FOREIGN KEY (houseId) REFERENCES PendingHouse(pendingHouseId) ON DELETE CASCADE
+);
+
+ALTER TABLE House DROP COLUMN imageUrl;
+

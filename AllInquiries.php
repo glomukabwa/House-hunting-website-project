@@ -58,6 +58,11 @@ $resultAnswered = $conn->query($sqlAnswered);
                     <td>
                         <?php
                         $message = urlencode($row['inquiryMessage']);
+                        // We use the above because if a message contains spaces, punctuation, or line breaks, these characters break the URL unless they are properly encoded.
+                        // urlencode() makes sure that any special characters (like spaces, quotes, symbols) are safely passed in the URL
+                        // Special characters like & are seen as a new parameter in the URL, so we need to encode them
+                        // Encoding also ensures safe transportation of the message through the URL
+
                         $link = "response.php?studentId={$row['studentId']}&houseId={$row['houseId']}&date={$row['inquiryDate']}&message={$message}";
                         ?>
                         <a href="<?= $link ?>"><button>Respond</button></a>

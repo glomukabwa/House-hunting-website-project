@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
 
             if (move_uploaded_file($_FILES["hImgs"]["tmp_name"][$i], $targetFile)) {
-                $stmtImg = $conn->prepare("INSERT INTO HouseImages (houseId, imageUrl) VALUES (?, ?)");
+                $stmtImg = $conn->prepare("INSERT INTO PendingHouseImages (houseId, imageUrl) VALUES (?, ?)");
                 $stmtImg->bind_param("is", $houseId, $targetFile);
                 $stmtImg->execute();
             }
