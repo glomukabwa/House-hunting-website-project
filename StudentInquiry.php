@@ -29,16 +29,17 @@
 
     <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $servername = "localhost";
-            $username = "root";
-            $password = ""; 
-            $database = "househuntingwebsitedb";
+            //$servername = "localhost";
+            //$username = "root";
+            //$password = ""; 
+            //$database = "househuntingwebsitedb";
 
-            $conn = new mysqli($servername, $username, $password, $database);
+            //$conn = new mysqli($servername, $username, $password, $database);
 
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
+            //if ($conn->connect_error) {
+                //die("Connection failed: " . $conn->connect_error);
+            //}
+            require 'config.php';
 
             $studentId = trim($_POST['studentId']);
             $houseId = trim($_POST['houseId']);
@@ -57,7 +58,7 @@
                 echo "<script>
                         document.getElementById('inquiryForm').style.display = 'none';
                         setTimeout(function() {
-                            window.location.href = 'StudentLandingPage.html';
+                            window.location.href = 'StudentLanding.php';
                         }, 2000);
                     </script>";
             } else {

@@ -116,3 +116,5 @@ CREATE TABLE HouseImages (
     FOREIGN KEY (houseId) REFERENCES PendingHouse(pendingHouseId) ON DELETE CASCADE
 );
 
+--Adding field for inquiry response
+ALTER TABLE inquiry ADD inquiryResponse TEXT;
