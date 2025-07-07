@@ -29,6 +29,7 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Your Inquiries</title>
+    <link rel="icon" type="icon" href="hhw-images\hhw-favicon.png">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/view_inquiries.css">
     

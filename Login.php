@@ -30,7 +30,8 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $servername = "localhost:3310";
+    //require 'config.php'; // Include your database connection file
+    $servername = "localhost:3306";
     $username = "root";
     $password = ""; 
     $database = "househuntingwebsitedb"; 
@@ -81,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($role === 'student') {
             if (password_verify($inputPassword, $student['studentPassword'])) {
                 $_SESSION['studentId'] = $student['studentId'];
-                echo "<script>alert('Welcome back " . addslashes($student['studentName']) . "'); window.location.href='slanding.html';</script>";
+                echo "<script>alert('Welcome back " . addslashes($student['studentName']) . "'); window.location.href='StudentLanding.php';</script>";
                 exit();
             } else {
                 echo "<script>alert('Incorrect password!!!'); window.history.back();</script>";
