@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 echo "<script>alert('Incorrect password!!!'); window.history.back();</script>";
             }
         } elseif ($role === 'admin') {
-            if ($inputPassword === $admin['adminPassword']) {
+            if (password_verify($inputPassword, $admin['adminPassword'])) {
                 $_SESSION['adminId'] = $admin['adminId'];
                 echo "<script>alert('Welcome back " . addslashes($admin['adminName']) . "'); window.location.href='admin.html';</script>";
                 exit();
