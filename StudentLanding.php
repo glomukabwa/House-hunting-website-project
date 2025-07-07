@@ -105,6 +105,11 @@ $houses = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
         ?>
             </a>
         </section>
+
+        
+        <a href="view_inquiries.php" class="viewinquiriesbtn">View Inquiries</a>
+
+
     </main>
 
     <footer>

@@ -74,7 +74,7 @@
             if ($row = $result->fetch_assoc()) {
                 if (password_verify($inputPassword, $row['studentPassword'])) {
                     $_SESSION['studentId'] = $row['studentId'];
-                    header("Location: StudentLandingPage.html");
+                    header("Location: StudentLanding.php");
                     exit();
                 }
             }
