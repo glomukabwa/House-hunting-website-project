@@ -78,21 +78,23 @@ $houses = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
         <p class="available">AVAILABLE HOUSES:</p><br>
 
         <section class="housepictures">
-            <a href="#">
         <?php
         if (count($houses) > 0) {
             $count = 0;
             echo '<div class="house-row">';
             foreach ($houses as $row) {
                 $image = !empty($row['imageUrl']) ? $row['imageUrl'] : 'images/default-placeholder.png';
-                echo '<div class="house-card">
-                        <img src="' . htmlspecialchars($image) . '" alt="' . htmlspecialchars($row['houseTitle']) . '">
-                        <div class="house-details">
-                            <p><strong>' . htmlspecialchars($row['houseTitle']) . '</strong></p>
-                            <p>Location: ' . htmlspecialchars($row['houseLocation']) . '</p>
-                            <p>Price: Ksh ' . number_format($row['housePrice'], 2) . '</p>
-                        </div>
-                      </div>';
+                $houseId = (int)$row['houseId'];
+
+echo '<a href="viewProperty.php?houseId=' . $houseId . '" class="house-card">
+        <img src="' . htmlspecialchars($image) . '" alt="' . htmlspecialchars($row['houseTitle']) . '">
+        <div class="house-details">
+            <p><strong>' . htmlspecialchars($row['houseTitle']) . '</strong></p>
+            <p>Location: ' . htmlspecialchars($row['houseLocation']) . '</p>
+            <p>Price: Ksh ' . number_format($row['housePrice'], 2) . '</p>
+        </div>
+      </a>';
+
                 $count++;
                 if ($count % 4 == 0 && $count < count($houses)) {
                     echo '</div><div class="house-row">';
@@ -103,7 +105,7 @@ $houses = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
             echo "<p>No houses available.</p>";
         }
         ?>
-            </a>
+            
         </section>
 
         
