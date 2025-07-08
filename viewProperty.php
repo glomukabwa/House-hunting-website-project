@@ -34,6 +34,7 @@ $images = $imageResult->fetch_all(MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <title><?php echo htmlspecialchars($house['houseTitle']); ?> - Details</title>
+    <link rel="icon" type="icon" href="hhw-images/hhw-favicon.png">
     <link rel="stylesheet" href="stylesheet1.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/slanding.css">
@@ -75,7 +76,7 @@ $images = $imageResult->fetch_all(MYSQLI_ASSOC);
                 ?>
             </div>
 
-            <div>
+            <div class="detailshouse">
                 <p><strong>Title:</strong> <?php echo htmlspecialchars($house['houseTitle']); ?></p>
                 <p><strong>Price:</strong> Ksh <?php echo number_format($house['housePrice'], 2); ?></p>
                 <p><strong>Location:</strong> <?php echo htmlspecialchars($house['houseLocation']); ?></p>

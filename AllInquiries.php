@@ -14,7 +14,7 @@ $resultAnswered = $conn->query($sqlAnswered);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>All Inquiries</title>
+    <title>Caretaker Landing Page</title>
     <link rel="icon" type="icon" href="hhw-images\hhw-favicon.png">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/allinquiries.css">
@@ -104,6 +104,12 @@ $resultAnswered = $conn->query($sqlAnswered);
         <p>No answered inquiries.</p>
     <?php endif; ?>
 </section>
+<br><br><br><br>
+ <div class="add-house-btn-wrapper">
+    <form action="houselisting.php" method="get">
+      <input type="submit" value="ADD HOUSE LISTING" class="caretakerLanding-button" />
+    </form>
+  </div>
      </main>
      <footer>
         <div class="sitemap">

@@ -59,6 +59,10 @@ main{
     padding: 30px 70px;
     border-radius: 5px;
 }
+
+.detailshouse{
+    color:rgb(111, 77, 56);
+}
 .button-container{
     text-align: center;
 }

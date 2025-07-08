@@ -35,16 +35,17 @@
 
     <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $servername = "localhost:3310";
-    $username = "root";
-    $password = ""; 
-    $database = "househuntingwebsitedb";
+    include 'config.php';
+    //$servername = "localhost:3310";
+    //$username = "root";
+    //$password = ""; 
+    //$database = "househuntingwebsitedb";
 
-    $conn = new mysqli($servername, $username, $password, $database);
+    //$conn = new mysqli($servername, $username, $password, $database);
 
-    if ($conn->connect_error) {
-        die("<p style='color:red;'>Connection failed: " . $conn->connect_error . "</p>");
-    }
+    //if ($conn->connect_error) {
+        //die("<p style='color:red;'>Connection failed: " . $conn->connect_error . "</p>");
+    //}
 
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
@@ -100,11 +101,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         } else {
             if ($role === 'student') {
-                header("Location: slanding.html");
-            } else {
-                header("Location: CaretakerLandingPage.php");
-            }
-            exit();
+        echo "<script>alert('Signup successful!'); window.location.href='StudentLanding.php';</script>";
+    } else {
+        echo "<script>alert('Signup successful! Please wait for verification from admin to access the Caretaker page.'); window.location.href='StudentLanding.php';</script>";
+    }
+    exit();
         }
 
     } catch (Exception $e) {
