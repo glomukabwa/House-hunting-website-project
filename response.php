@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt->execute() && $stmt->affected_rows > 0) {
         //The reason we need to check that the affected rows are more than sero is because, the execute() method will be true as long as the query runs successfully. 
         //If the update query finds no matches or tries to update a row that already has a response, it will still return true so we need to check if there are rows that have been affected.
-        echo "<script>alert('Response submitted successfully.'); window.location.href='CaretakerLandingPage.php';</script>";
+        echo "<script>alert('Response submitted successfully.'); window.location.href='AllInquiries.php';</script>";
     } else {
         echo "<p style='color:red;'>Failed to update response. Check that the inquiry exists.</p>";
     }

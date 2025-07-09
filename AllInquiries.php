@@ -1,13 +1,34 @@
 <?php
-include 'config.php';
+session_start();
+require 'config.php';
 
-// Fetch unanswered inquiries
-$sqlPending = "SELECT * FROM inquiry WHERE inquiryStatus = 'Pending...'";
-$resultPending = $conn->query($sqlPending);
+// Redirect if not logged in
+if (!isset($_SESSION['caretakerId'])) {
+    echo "<script>alert('Please log in first.'); window.location.href='login.php';</script>";
+    exit();
+}
 
-// Fetch answered inquiries
-$sqlAnswered = "SELECT * FROM inquiry WHERE inquiryStatus != 'Pending...'";
-$resultAnswered = $conn->query($sqlAnswered);
+$caretakerId = $_SESSION['caretakerId'];
+
+// Fetch unanswered inquiries for this caretaker's houses
+$sqlPending = "SELECT i.* 
+               FROM inquiry i
+               JOIN house h ON i.houseId = h.houseId
+               WHERE h.caretakerId = ? AND i.inquiryStatus = 'Pending...'";
+$stmtPending = $conn->prepare($sqlPending);
+$stmtPending->bind_param("i", $caretakerId);
+$stmtPending->execute();
+$resultPending = $stmtPending->get_result();
+
+// Fetch answered inquiries for this caretaker's houses
+$sqlAnswered = "SELECT i.* 
+                FROM inquiry i
+                JOIN house h ON i.houseId = h.houseId
+                WHERE h.caretakerId = ? AND i.inquiryStatus != 'Pending...'";
+$stmtAnswered = $conn->prepare($sqlAnswered);
+$stmtAnswered->bind_param("i", $caretakerId);
+$stmtAnswered->execute();
+$resultAnswered = $stmtAnswered->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -28,8 +49,8 @@ $resultAnswered = $conn->query($sqlAnswered);
         <nav>
             <a href="#">HOME</a>
             <a href="#">ABOUT US</a>
-            <a href="#">SIGN UP</a>
-            <a href="#">LOG IN</a>
+            <a href="SignupPage.php">SIGN UP</a>
+            <a href="Login.php">LOG IN</a>
         </nav>
         <div class="profile">
             <img src="images/black.jpeg" alt="black">
@@ -115,8 +136,8 @@ $resultAnswered = $conn->query($sqlAnswered);
         <div class="sitemap">
             <a href="#">HOME</a>
             <a href="#">ABOUT US</a>
-            <a href="#">SIGN UP</a>
-            <a href="#">LOG IN</a>
+            <a href="SignupPage.php">SIGN UP</a>
+            <a href="Login.php">LOG IN</a>
         </div>
         <div class="contacts">
             <p>GET IN TOUCH WITH US</p>

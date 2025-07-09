@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         if ($uploadOk) {
-            echo "<script>alert('House listing and images uploaded successfully.Await verification from administration'); window.location.href='CaretakerLandingPage.php';</script>";
+            echo "<script>alert('House listing and images uploaded successfully.Await verification from administration'); window.location.href='AllInquiries.php';</script>";
         } else {
             echo "<script>alert('Some images failed to upload.');</script>";
         }

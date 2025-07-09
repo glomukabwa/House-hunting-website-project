@@ -19,8 +19,8 @@
         <nav>
             <a href="#">HOME</a>
             <a href="#">ABOUT US</a>
-            <a href="#">SIGN UP</a>
-            <a href="#">LOG IN</a>
+            <a href="SignupPage.php">SIGN UP</a>
+            <a href="Login.php">LOG IN</a>
         </nav>
         <div class="profile">
             <img src="images/black.jpeg" alt="black">
@@ -152,8 +152,8 @@
         <div class="sitemap">
             <a href="#">HOME</a>
             <a href="#">ABOUT US</a>
-            <a href="#">SIGN UP</a>
-            <a href="#">LOG IN</a>
+            <a href="SignupPage.php">SIGN UP</a>
+            <a href="Login.php">LOG IN</a>
         </div>
         <div class="contacts">
             <p>GET IN TOUCH WITH US</p>

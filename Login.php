@@ -101,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
 
         } elseif ($role === 'admin') {
-            if (password_verify($inputPassword, $admin['adminPassword'])) {
+            if ($inputPassword === $admin['adminPassword']) {
                 $_SESSION['adminId'] = $admin['adminId'];
                 echo "<script>alert('Welcome back " . addslashes($admin['adminName']) . "'); window.location.href='admin.php';</script>";
                 exit();
