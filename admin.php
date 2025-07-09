@@ -42,6 +42,24 @@
     $caretakers = $conn->query("SELECT * FROM caretaker WHERE isVerified = FALSE");
 
     while ($row = $caretakers->fetch_assoc()) {
+        //fetch_assoc() works the same with fetch_array(MYSQLI_ASSOC) but is more concise.
+        //However, you should know that with fetch_array(), you can use:
+        //fetch_array(MYSQLI_NUM) to get a numeric array,
+        //fetch_array(MYSQLI_ASSOC) to get only an associative array or 
+        //fetch_array(MYSQLI_BOTH) to get both numeric and associative arrays, or
+        //The difference btwn MYSQLI_NUM and MYSQLI_ASSOC is that MYSQLI_NUM returns an array with numeric indices (0, 1, 2, etc.) while MYSQLI_ASSOC returns an array with column names as keys.
+        //So if you have a table with colums Name and email, with the values John and john@gmail.com,
+        //fetch_array(MYSQLI_NUM) would return [0 => 'John', 1 => ' while
+        //fetch_array(MYSQLI_ASSOC) would return ['Name' => 'John', 'email' => ' Same as fetch_assoc()
+        //fetch_array(MYSQLI_BOTH) would return both, so you can access the values using either numeric or associative indices.
+        //We don't use fetch_all(MYSQLI_ASSOC) here because it returns all rows at once, which is not efficient for large datasets. You'd have to loop through the result set to access each row(eg using for each), which is what fetch_assoc() does for us one row at a time.
+        //fetch_all(MYSQLI_ASSOC) would return sth like this:[
+                                                               //['id' => 1, 'name' => 'Alice'],
+                                                               //['id' => 2, 'name' => 'Bob'],
+                                                                   //...
+                                                                 //]
+        //Accessing the values would take more work so we only use it for large datasets where we need to process all rows at once. For example, displaying houses in the student landing page.
+        
        echo "<tr>
             <td>{$row['caretakerId']}</td>
             <td>{$row['caretakerName']}</td>
@@ -60,7 +78,7 @@
                 </form>
             </td>
           </tr>";
-    }
+    }// We make the caretakerId hidden in the above froms so that they can't be displayed and also so that we can pass them to the respective pages(verify and reject) so that they can be used to update the database.
     ?>
      </table>
      <br><br><br><br><br>

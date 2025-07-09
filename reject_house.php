@@ -2,8 +2,8 @@
 // This code deletes rejected houses from Pending houses and adds them to the RejectedHouse table.
 include 'config.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-    $id = intval($_POST['id']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {//The additional isset() method here is just for safety.
+    $id = intval($_POST['id']);//Converts input to integer.
     $reason = $_POST['reason'] ?? 'No reason provided';
 
     // Fetch the pending house data

@@ -42,12 +42,12 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include 'config.php';
 
-    $studentId = trim($_POST['studentID']);
+    $studentId = trim($_POST['studentID']);//trim() removes spaces from a string.
     $houseId = trim($_POST['houseID']);
     $inquiryDate = trim($_POST['date']);
     $responseMessage = trim($_POST['response']);
 
-    // Use prepared statement to update the response and status
+    
     $sql = "UPDATE inquiry 
             SET inquiryResponse = ?, inquiryStatus = 'Answered'
             WHERE studentId = ? AND houseId = ? AND inquiryDate = ?";
@@ -56,6 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssss", $responseMessage, $studentId, $houseId, $inquiryDate);
 
     if ($stmt->execute() && $stmt->affected_rows > 0) {
+        //The reason we need to check that the affected rows are more than sero is because, the execute() method will be true as long as the query runs successfully. 
+        //If the update query finds no matches or tries to update a row that already has a response, it will still return true so we need to check if there are rows that have been affected.
         echo "<script>alert('Response submitted successfully.'); window.location.href='CaretakerLandingPage.php';</script>";
     } else {
         echo "<p style='color:red;'>Failed to update response. Check that the inquiry exists.</p>";
