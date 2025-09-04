@@ -38,6 +38,9 @@ $hasSearch = !empty($location) || !empty($maxPrice) || !empty($minPrice);
 
 if (!empty($location)) {
     $locationEscaped = $conn->real_escape_string($location);
+    //$conn = new mysqli(...) is a line that creates a connection object to your MySQL database using PHP’s mysqli extension (Look in config.php)
+    //$conn is not just a variable — it’s now an object that represents your database connection. It has methods (functions) and properties that let you interact with MySQL.
+    //The $conn->real_escape_string($location)-> means you’re calling a method (function) that belongs to the $conn object.
     //real_escape_string is used to escape special characters in a string for use in an SQL statement, preventing SQL injection attacks.
     //For example, if a user inputs a location with special characters like quotes or semicolons, this function will escape them to ensure the query runs correctly.
     //Eg I enter "Nairobi" as the location, it will be escaped to 'Nairobi' in the query.
@@ -142,20 +145,41 @@ $houses = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
                 <button type="submit" class="searchbutton">ENTER</button>
             </form>
         </section>
-        
         <p class="available">AVAILABLE HOUSES:</p><br>
 
         <section class="housepictures">
         <?php
+        //Rule of differentiating btwn '' and "":
+            //Use double quotations if there is a variable inside the quotes cz if u don't, php won't interpret the variable. It will treat it like a string and output eg Hello $name instead of looking for value assigned to name
+            //However, u'll notice that I've used single quotes when echoing the house image and details even thought there are variables inside. In this case, when I want to go back to php I close the single quotes and use concatination(.). If I used quotes, there would be more work. Check in Chat
+            //Or better: Use <?= which is a short form of <?php echo. Check in chat for more details. Use this next time cz it's easier
         if (count($houses) > 0) {//Creates a loop for only if there are results meaning if there are houses available
             $count = 0;//Counts the number of houses displayed
             echo '<div class="house-row">';//Starts a new row for displaying houses
             foreach ($houses as $row) {//foreach is used for looping through arrays.
                 // It works like this: foreach ($array as $value) { // code to execute }
                 //So here, $houses is the array and $row is each individual house in that array. I should have given $row a better name like $house but don't let it confuse u.
-                //So for each house, we will get its image, id:
-                $image = !empty($row['imageUrl']) ? $row['imageUrl'] : 'images/default-placeholder.png';//If an image URL is empty, use a default placeholder image.
-                $houseId = (int)$row['houseId'];
+                $image = !empty($row['imageUrl']) ? $row['imageUrl'] : 'images/default-placeholder.png';
+                //So inside the loop, $house is just a single house’s data, e.g.:
+                /**$row = [
+                    "id" => 1,
+                    "name" => "Green Villa",
+                    "imageUrl" => "villa.jpg"
+                ];
+                 */
+                //This is why we don't need to use it like this: hi.imageUrl above. 
+                //We were using that to get the specific houses but now that we have them and have broken them down in single arrays, we don't need to do that
+                //The long form of this: $image = !empty($row['imageUrl']) ? $row['imageUrl'] : 'images/default-placeholder.png'; is this:
+                    /**if (!empty($house['imageUrl'])) {
+                        $image = $house['imageUrl'];
+                    } else {
+                        $image = 'default.png';
+                    }
+                    */
+                //!empty($row['imageUrl']) Checks if there is an imageUrl for a house
+                //If the imageUrl exists, image is assigned the imageUrl ( $image = $house['imageUrl']; )
+                //If an image URL is empty, use a default placeholder image. I forgot to save a default image the images folder
+                $houseId = (int)$row['houseId']; //This is necessary because when a value comes from the database, it is a string by default so here we are telling it to treat the value like an integer
 
                 //And then, display the house details in a card format.
                 //(Card is a UI design pattern that displays information in a visually appealing way, like a card in a deck of cards.)
@@ -167,16 +191,17 @@ $houses = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
                 <div class="house-details">
                 <p><strong>' . htmlspecialchars($row['houseTitle']) . '</strong></p>
                 <p>Location: ' . htmlspecialchars($row['houseLocation']) . '</p>
-                <p>Price: Ksh ' . number_format($row['housePrice'], 2) . '</p>
+                <p>Price: Ksh ' . number_format($row['housePrice'], 2) . '</p> 
                 </div>
                 </a>';//The </div> closes the house-details div, and </a> closes the anchor tag.
+                //number_format adds decimal places to a number. The syntax is: eg. echo number_format($price, 2); The 2 here means decimal places
 
                 $count++;
                 if ($count % 4 == 0 && $count < count($houses)) {//Once we've reached 4 houses, we close the current row and start a new one.
                     echo '</div><div class="house-row">';//This closes the previous row and starts a new one.
                 }
             }
-            echo '</div>'; // close last row. We put (<div class="house-row">) in the previous line to open a new row and now we are closing it.
+            echo '</div>'; // close last row. We put (<div class="house-row">) in the previous line to open a new row in case and now we are closing it.
         } else {
             echo "<p>No houses available.</p>"; //If the count = 0, meaning no houses were found, display this message.
         }
