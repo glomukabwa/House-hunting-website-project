@@ -24,6 +24,13 @@ if (isset($_GET['houseId'])) {
         //Before we do this: $row = $result->fetch_assoc() , the result is in forms of a table. 
         //The fetch_assoc() converts it to an associative array to make it easy to use
         while ($row = $result->fetch_assoc()) {
+        //fetch_assoc fetches a row from the table in the result we have gotten above
+        //while checks if the fetch_assoc() is  returning arrays. If it returns null which mean there is no more data in the table, the while becomes false so we stop
+        //Why do we need to iterate? So imagine we have a table like:
+        // 1 => image1.jpg
+        // 1 => image2.jpg
+        //fetch_assoc will fetch the first one then will give the image the src as indicated below so that the image is displayed
+        //If we don't iterate, it will only fetch the first image and then stop and in out database, a house can have many images
             echo "<img src='{$row['imageUrl']}' alt='House Image' style='width:200px; margin:10px; border-radius:8px;'>";
         }
     } else {
