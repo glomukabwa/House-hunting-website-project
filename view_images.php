@@ -3,7 +3,7 @@ include 'config.php';
 
 if (isset($_GET['houseId'])) {
     $houseId = intval($_GET['houseId']);//This works the same as (int)houseId however:
-    //intval has an additional method which is base eg intval(number, 2) will interpret number as a binary so:
+    //intval has an additional method which is base eg intval(number, 2) tells compiler to interpret number as a binary so:
     //intval("10" ,2) //10 is a binary
     //intval("77", 8) //77 is interpreted as octal
     //2 -> binary, 8 -> octal, 10 -> decimal, 16 -> hexadecimal
