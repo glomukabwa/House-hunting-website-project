@@ -16,7 +16,13 @@ if (isset($_GET['houseId'])) {
 
     echo "<h2>Images for House ID: {$houseId}</h2>";
 
-    if ($result->num_rows > 0) {
+    if ($result->num_rows > 0) {//Used to check the number of rows that have been returned by a query
+        //Plz note that the above and if($result) are not the same
+        //if($result) checks if the query has been executed successfully so even if the number of 
+        //rows returned are 0, it indicates that it is succesful but num_rows checks the number of rows returned
+        //In this case, we are doing that to check if the image is in PendingHouseImages
+        //Before we do this: $row = $result->fetch_assoc() , the result is in forms of a table. 
+        //The fetch_assoc() converts it to an associative array to make it easy to use
         while ($row = $result->fetch_assoc()) {
             echo "<img src='{$row['imageUrl']}' alt='House Image' style='width:200px; margin:10px; border-radius:8px;'>";
         }
