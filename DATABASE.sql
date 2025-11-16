@@ -120,7 +120,7 @@ CREATE TABLE HouseImages (
 );
 
 -- Adding field for inquiry response
-ALTER TABLE inquiry ADD inquiryResponse TEXT;
+ALTER TABLE Inquiry ADD inquiryResponse TEXT;
 
 CREATE TABLE PendingHouseImages (
     imageId INT AUTO_INCREMENT PRIMARY KEY,
