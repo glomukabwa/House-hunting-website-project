@@ -1,5 +1,5 @@
 -- Drop if exists to avoid conflicts
-DROP TABLE IF EXISTS Reviews, Inquiry, House, Student, Caretaker, Admin;
+DROP TABLE IF EXISTS Reviews, Inquiry, HouseImages, House, Student, Caretaker, Admin;
 
 -- Student Table
 CREATE TABLE Student (
