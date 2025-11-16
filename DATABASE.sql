@@ -1,5 +1,8 @@
--- Drop if exists to avoid conflicts
-DROP TABLE IF EXISTS Reviews, Inquiry, HouseImages, House, Student, Caretaker, Admin;
+-- Drop child tables first
+DROP TABLE IF EXISTS HouseImages, Reviews, Inquiry, PendingHouseImages, RejectedHouse, RejectedCaretaker;
+
+-- Then drop parent tables
+DROP TABLE IF EXISTS House, PendingHouse, Student, Caretaker, Admin;
 
 -- Student Table
 CREATE TABLE Student (
