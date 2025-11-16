@@ -126,5 +126,6 @@ CREATE TABLE PendingHouseImages (
     FOREIGN KEY (houseId) REFERENCES PendingHouse(pendingHouseId) ON DELETE CASCADE
 );
 
-ALTER TABLE House DROP COLUMN imageUrl;
+ALTER TABLE House DROP COLUMN IF EXISTS imageUrl;
+
 
