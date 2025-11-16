@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
 -- Drop child tables first
 DROP TABLE IF EXISTS HouseImages;
 DROP TABLE IF EXISTS Reviews;
@@ -12,6 +14,8 @@ DROP TABLE IF EXISTS PendingHouse;
 DROP TABLE IF EXISTS Student;
 DROP TABLE IF EXISTS Caretaker;
 DROP TABLE IF EXISTS Admin;
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- Student Table
 CREATE TABLE Student (
