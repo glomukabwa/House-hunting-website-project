@@ -1,8 +1,17 @@
 -- Drop child tables first
-DROP TABLE IF EXISTS HouseImages, Reviews, Inquiry, PendingHouseImages, RejectedHouse, RejectedCaretaker;
+DROP TABLE IF EXISTS HouseImages;
+DROP TABLE IF EXISTS Reviews;
+DROP TABLE IF EXISTS Inquiry;
+DROP TABLE IF EXISTS PendingHouseImages;
+DROP TABLE IF EXISTS RejectedHouse;
+DROP TABLE IF EXISTS RejectedCaretaker;
 
 -- Then drop parent tables
-DROP TABLE IF EXISTS House, PendingHouse, Student, Caretaker, Admin;
+DROP TABLE IF EXISTS House;
+DROP TABLE IF EXISTS PendingHouse;
+DROP TABLE IF EXISTS Student;
+DROP TABLE IF EXISTS Caretaker;
+DROP TABLE IF EXISTS Admin;
 
 -- Student Table
 CREATE TABLE Student (
