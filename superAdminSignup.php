@@ -30,11 +30,12 @@
     </form>
 
     <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $servername = "localhost:3310";
-    $username = "root";
-    $password = ""; 
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
+    $servername = "localhost";
+    $username = "user";
+    $password = "ServerAdminHHW@2025";
     $database = "househuntingwebsitedb";
+
 
     $conn = new mysqli($servername, $username, $password, $database);
 
@@ -89,3 +90,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
+
