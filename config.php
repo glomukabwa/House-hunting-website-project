@@ -9,7 +9,7 @@ $database = "househunting";
 $servername = "localhost";
 $username = "user";
 $password = "ServerAdminHHW@2025";
-$database = "househuntingwebsitedb";
+$database = "campuskeys";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
