@@ -17,9 +17,9 @@ As part of the development team, I contributed to:
 
 🔹**Demo Pictures**
 - The student landing page:<br><br>
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0b62eab1-52f4-4390-902e-0a4085616ca4" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0b62eab1-52f4-4390-902e-0a4085616ca4" /><br>
 - Admin Page:<br><br>
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/22b8b23a-474a-4d61-91a8-0477257892b8" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/22b8b23a-474a-4d61-91a8-0477257892b8" /><br>
 - Caretaker Page:<br><br>
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b2d6e692-78bf-45bb-a09c-2625bbf8ec46" /><br>
 
