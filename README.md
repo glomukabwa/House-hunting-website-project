@@ -2,7 +2,7 @@
 
 This project is a **web application** designed to help Strathmore University students find and book available accommodation near the university. It connects students seeking housing with caretakers who list properties they are in charge of on the platform.
 
-🔹**My Role and Contributions**
+## My Role and Contributions
 As part of the development team, I contributed to:
 - Designing and implementing the **web interface** using HTML, CSS, and PHP.
 - Integrating the **database (MySQL)** for storing and retrieving listings.
@@ -10,12 +10,12 @@ As part of the development team, I contributed to:
 - Created and implemented the **admin dashboard** for managing listings, approving/rejecting caretaker accounts, and monitoring system activity
 - Conducting debugging and testing to ensure a smooth user experience.
 
-🔹 **Technologies Used**
+## Technologies Used
 - Frontend: HTML, CSS, JavaScript  
 - Backend: PHP  
 - Database: MySQL
 
-🔹**Demo Pictures**
+## Demo Pictures
 - The student landing page:<br><br>
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0b62eab1-52f4-4390-902e-0a4085616ca4" /><br>
 - Admin Page:<br><br>
