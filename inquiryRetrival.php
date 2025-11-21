@@ -2,8 +2,8 @@
 session_start(); 
 
 $servername = "localhost";
-$username = "root";
-$password = ""; 
+$username = "user";
+$password = "ServerAdminHHW@2025"; 
 $database = "househuntingwebsitedb"; 
 
 $conn = new mysqli($servername, $username, $password, $database);
@@ -30,3 +30,4 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 ?>
+

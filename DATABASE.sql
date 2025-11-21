@@ -1,5 +1,21 @@
--- Drop if exists to avoid conflicts
-DROP TABLE IF EXISTS Reviews, Inquiry, House, Student, Caretaker, Admin;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Drop child tables first
+DROP TABLE IF EXISTS HouseImages;
+DROP TABLE IF EXISTS Reviews;
+DROP TABLE IF EXISTS Inquiry;
+DROP TABLE IF EXISTS PendingHouseImages;
+DROP TABLE IF EXISTS RejectedHouse;
+DROP TABLE IF EXISTS RejectedCaretaker;
+
+-- Then drop parent tables
+DROP TABLE IF EXISTS House;
+DROP TABLE IF EXISTS PendingHouse;
+DROP TABLE IF EXISTS Student;
+DROP TABLE IF EXISTS Caretaker;
+DROP TABLE IF EXISTS Admin;
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- Student Table
 CREATE TABLE Student (
@@ -116,8 +132,8 @@ CREATE TABLE HouseImages (
     FOREIGN KEY (houseId) REFERENCES House(houseId) ON DELETE CASCADE
 );
 
---Adding field for inquiry response
-ALTER TABLE inquiry ADD inquiryResponse TEXT;
+-- Adding field for inquiry response
+ALTER TABLE Inquiry ADD inquiryResponse TEXT;
 
 CREATE TABLE PendingHouseImages (
     imageId INT AUTO_INCREMENT PRIMARY KEY,
@@ -127,4 +143,6 @@ CREATE TABLE PendingHouseImages (
 );
 
 ALTER TABLE House DROP COLUMN imageUrl;
+
+
 
